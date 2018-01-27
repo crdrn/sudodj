@@ -92,6 +92,19 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
       $.post('/move', {cell: id});
     }
   }
+  
+  /**
+   * Send user's request to change color
+   */
+  function changeLightSquare(e) {
+    var id = $(e.currentTarget).index();
+    var colors = ["red", "green", "blue", "yellow"];
+    var randomColor = colors[Math.floor(Math.random()*colors.length)];
+    if (isMyMove() && state.board[id] === ' ') {
+    	$.post('/light', {color: randomColor, cell: id});
+    }	
+  }
+
 
   /**
    * This method lets the server know that the user has opened the channel
@@ -167,7 +180,8 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
         opts.url += '?gameKey=' + state.gameKey;
     });
 
-    $('#board').on('click', '.cell', moveInSquare);
+    //$('#board').on('click', '.cell', moveInSquare);
+    $('#board').on('click', '.cell', changeLightSquare);
 
     openChannel();
 
