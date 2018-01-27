@@ -48,14 +48,6 @@
         <url-pattern>/opened</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>MoveServlet</servlet-name>
-        <servlet-class>com.example.appengine.firetactoe.MoveServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MoveServlet</servlet-name>
-        <url-pattern>/move</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>LightServlet</servlet-name>
         <servlet-class>com.example.appengine.firetactoe.LightServlet</servlet-class>
     </servlet>
