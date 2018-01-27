@@ -44,35 +44,9 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
 
     $('.cell').each(function(i) {
       var square = $(this);
-      var value = state.board[i];
-      square.html(' ' === value ? '' : value);
-
-      if (state.winner && state.winningBoard) {
-        if (state.winningBoard[i] === value) {
-          if (state.winner === state.me) {
-            square.css('background', 'green');
-          } else {
-            square.css('background', 'red');
-          }
-        } else {
-          square.css('background', '');
-        }
-      }
+      var color = state.board[i];
+      square.style.backgroundColor = color;
     });
-
-    var displayArea = $('#display-area');
-
-    if (!state.userO) {
-      displayArea[0].className = 'waiting';
-    } else if (state.winner === state.me) {
-      displayArea[0].className = 'won';
-    } else if (state.winner) {
-      displayArea[0].className = 'lost';
-    } else if (isMyMove()) {
-      displayArea[0].className = 'your-move';
-    } else {
-      displayArea[0].className = 'their-move';
-    }
   }
 
   function isMyMove() {

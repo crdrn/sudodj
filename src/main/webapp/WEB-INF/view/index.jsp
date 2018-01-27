@@ -34,7 +34,7 @@
     	Quick link to this game: <span id="this-game-link"><a href="<%= request.getAttribute("game_link") %>"><%= request.getAttribute("game_link") %></a></span>
     </div>
     <div id="board">
-      <div class="square" id="0"></div>
+      <div class="cell" id="0"></div>
     </div>
   </body>
 </html>
