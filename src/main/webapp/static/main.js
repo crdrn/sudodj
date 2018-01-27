@@ -74,7 +74,7 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
     var id = $(e.currentTarget).index();
     var colors = ["red", "green", "blue", "yellow"];
     var randomColor = colors[Math.floor(Math.random()*colors.length)];
-    if (isMyMove() && state.board[id] === ' ') {
+    if (isMyMove()) {
     	$.post('/light', {color: randomColor, cell: id});
     }	
   }
