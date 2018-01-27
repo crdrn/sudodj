@@ -178,7 +178,8 @@ public class TicTacToeServletTest {
 
     // Insert a game
     Objectify ofy = ObjectifyService.ofy();
-    Game game = new Game("some-other-user-id", null, "         ", true);
+    String[] board = {"red"};
+    Game game = new Game("some-other-user-id", null, board, true);
     ofy.save().entity(game).now();
     String gameKey = game.getId();
 

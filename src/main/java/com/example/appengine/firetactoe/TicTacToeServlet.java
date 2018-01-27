@@ -82,7 +82,8 @@ public class TicTacToeServlet extends HttpServlet {
     } else {
       // Initialize a new board. The board is represented as a String of 9 spaces, one for each
       // blank spot on the tic-tac-toe board.
-      game = new Game(userId, null, "         ", true);
+      String[] board = {"red"};
+      game = new Game(userId, null, board, true);
       ofy.save().entity(game).now();
       gameKey = game.getId();
     }

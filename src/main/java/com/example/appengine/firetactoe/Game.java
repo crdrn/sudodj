@@ -59,7 +59,7 @@ public class Game {
   public String id;
   public String userX;
   public String userO;
-  public String board;
+  public String[] board;
   public Boolean moveX;
   public String winner;
   public String winningBoard;
@@ -70,7 +70,7 @@ public class Game {
     this.id = UUID.randomUUID().toString();
   }
 
-  Game(String userX, String userO, String board, boolean moveX) {
+  Game(String userX, String userO, String[] board, boolean moveX) {
     this.id = UUID.randomUUID().toString();
     this.userX = userX;
     this.userO = userO;
@@ -98,11 +98,11 @@ public class Game {
     this.userO = userO;
   }
 
-  public String getBoard() {
+  public String[] getBoard() {
     return board;
   }
 
-  public void setBoard(String board) {
+  public void setBoard(String[] board) {
     this.board = board;
   }
 
@@ -147,64 +147,6 @@ public class Game {
     sendUpdateToUser(userO);
   }
   // [END send_updates]
-
-  /**
-   * checkWin - has anyone won.
-   */
-  public void checkWin() {
-    final Pattern[] wins;
-    if (moveX) {
-      wins = XWins;
-    } else {
-      wins = OWins;
-    }
-
-    for (Pattern winPattern : wins) {
-      if (winPattern.matcher(board).matches()) {
-        if (moveX) {
-          winner = userX;
-        } else {
-          winner = userO;
-        }
-        winningBoard = winPattern.toString();
-      }
-    }
-  }
-
-  /**
-   * makeMove for user.
-   * @param position .
-   * @param userId .
-   * @return true if successful.
-   */
-  public boolean makeMove(int position, String userId) {
-    String currentMovePlayer;
-    char value;
-    if (getMoveX()) {
-      value = 'X';
-      currentMovePlayer = getUserX();
-    } else {
-      value = 'O';
-      currentMovePlayer = getUserO();
-    }
-
-    if (currentMovePlayer.equals(userId)) {
-      char[] boardBytes = getBoard().toCharArray();
-      boardBytes[position] = value;
-      setBoard(new String(boardBytes));
-      checkWin();
-      setMoveX(!getMoveX());
-      try {
-        sendUpdateToClients();
-      } catch (IOException e) {
-        LOGGER.log(Level.SEVERE, "Error sending Game update to Firebase", e);
-        throw new RuntimeException(e);
-      }
-      return true;
-    }
-
-    return false;
-  }
   
   /**
    * change light on click.
@@ -214,20 +156,17 @@ public class Game {
    */
   public boolean changeLight(int position, String color, String userId) {
     String currentMovePlayer;
-    char value;
     if (getMoveX()) {
-      value = 'X';
       currentMovePlayer = getUserX();
     } else {
-      value = 'O';
       currentMovePlayer = getUserO();
     }
 
     if (currentMovePlayer.equals(userId)) {
-      char[] boardBytes = getBoard().toCharArray();
-      boardBytes[position] = value;
-      setBoard(new String(boardBytes));
-      checkWin();
+      String[] boardBytes = getBoard();
+      boardBytes[position] = color;
+      setBoard(boardBytes);
+      //checkWin();
       setMoveX(!getMoveX());
       try {
         sendUpdateToClients();

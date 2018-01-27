@@ -124,7 +124,8 @@ public class DeleteServletTest {
   public void doPost_deleteGame() throws Exception {
     // Insert a game
     Objectify ofy = ObjectifyService.ofy();
-    Game game = new Game(USER_ID, "my-opponent", "         ", true);
+    String[] board = {"red"};
+    Game game = new Game(USER_ID, "my-opponent", board, true);
     ofy.save().entity(game).now();
     String gameKey = game.getId();
     when(mockRequest.getParameter("gameKey")).thenReturn(gameKey);
