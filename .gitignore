@@ -1,0 +1,4 @@
+*firebase_config.jspf
+*.DS_Store
+*.iml
+*service-account.json
