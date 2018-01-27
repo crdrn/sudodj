@@ -1,4 +1,11 @@
+# Credentials
 *firebase_config.jspf
+*service-account.json
+
+# Other stuff
 *.DS_Store
 *.iml
-*service-account.json
+.idea/
+out/
+target/
+*.iml
