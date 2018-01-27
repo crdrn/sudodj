@@ -42,11 +42,16 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
   function updateGame(newState) {
     $.extend(state, newState);
 
+    /*
     $('.cell').each(function(i) {
       var square = $(this);
       var color = state.board[i];
       square.style.backgroundColor = color;
     });
+    */
+    var square = document.getElementById("0");
+    var color = state.board[i];
+    square.style.backgroundColor = color;
   }
 
   function isMyMove() {
@@ -74,9 +79,7 @@ function initGame(gameKey, me, token, channelId, initialMessage) {
     var id = $(e.currentTarget).index();
     var colors = ["red", "green", "blue", "yellow"];
     var randomColor = colors[Math.floor(Math.random()*colors.length)];
-    if (isMyMove()) {
-    	$.post('/light', {color: randomColor, cell: id});
-    }	
+    $.post('/light', {color: randomColor, cell: id});	
   }
 
 
