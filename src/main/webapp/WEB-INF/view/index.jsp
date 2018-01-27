@@ -30,8 +30,11 @@
   </head>
   <body>
     <h2>sudodj time</h2>
-    <div id="elements">
-      <div class="square" id="1"></div>
+    <div id="this-game" float="top">
+    	Quick link to this game: <span id="this-game-link"><a href="<%= request.getAttribute("game_link") %>"><%= request.getAttribute("game_link") %></a></span>
+    </div>
+    <div id="board">
+      <div class="square" id="0"></div>
     </div>
   </body>
 </html>
