@@ -205,4 +205,39 @@ public class Game {
 
     return false;
   }
+  
+  /**
+   * change light on click.
+   * @param position .
+   * @param userId .
+   * @return true if successful.
+   */
+  public boolean changeLight(int position, String color, String userId) {
+    String currentMovePlayer;
+    char value;
+    if (getMoveX()) {
+      value = 'X';
+      currentMovePlayer = getUserX();
+    } else {
+      value = 'O';
+      currentMovePlayer = getUserO();
+    }
+
+    if (currentMovePlayer.equals(userId)) {
+      char[] boardBytes = getBoard().toCharArray();
+      boardBytes[position] = value;
+      setBoard(new String(boardBytes));
+      checkWin();
+      setMoveX(!getMoveX());
+      try {
+        sendUpdateToClients();
+      } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, "Error sending Game update to Firebase", e);
+        throw new RuntimeException(e);
+      }
+      return true;
+    }
+
+    return false;
+  }
 }
