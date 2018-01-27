@@ -9,3 +9,18 @@
 out/
 target/
 *.iml
+
+# Eclipse IDE
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.classpath
+.project
